@@ -64,7 +64,24 @@ async function  loginController(req, res) {
     })
 }
 
+async function logoutController(req, res) {
+    try {
+        // Cookie ko clear karne ke liye expire date purani set kar dete hain
+        res.cookie('token', '', {
+            httpOnly: true,
+            expires: new Date(0), // Immediate expire
+        });
+
+        res.status(200).json({
+            message: "Logged out successfully"
+        });
+    } catch (error) {
+        res.status(500).json({ message: "Logout failed" });
+    }
+}
+
 module.exports = {
     registerController,
-    loginController
+    loginController,
+    logoutController
 }

@@ -11,6 +11,9 @@ const upload = multer({
     storage: multer.memoryStorage(),
 })
 
+// router.post('/',upload.single("image"), createPostController);
+
+// it will use when login required
 router.post('/', authMiddleware,upload.single("image"), createPostController);
 
 module.exports = router;
